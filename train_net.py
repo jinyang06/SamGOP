@@ -45,11 +45,10 @@ from detectron2.solver.build import maybe_add_gradient_clipping
 from detectron2.utils.logger import setup_logger
 
 # MaskDINO
-from maskdino import (
+from maskGOP import (
     COCOInstanceNewBaselineDatasetMapper,
     COCOPanopticNewBaselineDatasetMapper,
     InstanceSegEvaluator,
-    MaskFormerSemanticDatasetMapper,
     SemanticSegmentorWithTTA,
     add_maskdino_config,
     DetrDatasetMapper,
@@ -245,10 +244,6 @@ class Trainer(DefaultTrainer):
             mapper = COCOPanopticNewBaselineDatasetMapper(cfg, True, prefetch_factor=2)
             # x=mapper
             # z=cfg
-            return build_detection_train_loader(cfg, mapper=mapper)
-        # Semantic segmentation dataset mapper
-        elif cfg.INPUT.DATASET_MAPPER_NAME == "mask_former_semantic":
-            mapper = MaskFormerSemanticDatasetMapper(cfg, True)
             return build_detection_train_loader(cfg, mapper=mapper)
         else:
             mapper = None

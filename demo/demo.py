@@ -23,7 +23,7 @@ from detectron2.data.detection_utils import read_image
 from detectron2.projects.deeplab import add_deeplab_config
 from detectron2.utils.logger import setup_logger
 from detectron2.data import detection_utils as utils
-from maskdino import add_maskdino_config
+from maskGOP import add_maskdino_config
 from predictor import VisualizationDemo
 from PIL import Image,ImageDraw
 from tqdm import tqdm

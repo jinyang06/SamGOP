@@ -70,7 +70,7 @@ If you want to train on GOO-Real or GOO-Synth dataset, please keep the data stru
 ```bash
 cd SamGOP
 conda create --name samgop python=3.8 -y
-conda activate maskdino
+conda activate samgop
 conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
 pip install -U opencv-python
 
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 ### CUDA kernel for MSDeformAttn
 ```bash
-cd maskdino/modeling/pixel_decoder/ops
+cd maskGOP/modeling/pixel_decoder/ops
 sh make.sh
 ```
 
@@ -102,5 +102,5 @@ To eval the model, please follow these commands:
 python eavl_train_net.py --eval-only --num-gpus 1 --config-file config_path MODEL.WEIGHTS weights_path
 ```
 
-
-
+## Acknowledgements
+Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)

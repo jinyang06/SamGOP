@@ -341,19 +341,21 @@ def inference_on_dataset(
         logger.info('Dist: {}'.format(l2))
         logger.info('Ang: {}'.format(ang))
         logger.info('Direction Angle error: {}'.format(ang_error))
-
-        l2_gtr, ang_gtr = np.mean(np.array(total_error_gtr), axis=0)
-        all_predmap_gtr = np.stack(all_predmap_gtr).reshape([-1])
-        all_gtmap_gtr = np.stack(all_gtmap_gtr).reshape([-1])
-        auc_gtr = roc_auc_score(all_gtmap_gtr, all_predmap_gtr)
-        AP = true_positives/(true_positives+false_positives)
-        logger.info('Gaze estimation evaluation metric using GTR:')
-        logger.info('AUC_GTR: {}'.format(auc_gtr))
-        logger.info('Dist_GTR: {}'.format(l2_gtr))
-        logger.info('Ang_GTR: {}'.format(ang_gtr))
-        logger.info('mAP: {}'.format(AP))
-        logger.info('True_positives: {}'.format(true_positives))
-        logger.info('False_positives: {}'.format(false_positives))
+        try:
+            l2_gtr, ang_gtr = np.mean(np.array(total_error_gtr), axis=0)
+            all_predmap_gtr = np.stack(all_predmap_gtr).reshape([-1])
+            all_gtmap_gtr = np.stack(all_gtmap_gtr).reshape([-1])
+            auc_gtr = roc_auc_score(all_gtmap_gtr, all_predmap_gtr)
+            AP = true_positives/(true_positives+false_positives)
+            logger.info('Gaze estimation evaluation metric using GTR:')
+            logger.info('AUC_GTR: {}'.format(auc_gtr))
+            logger.info('Dist_GTR: {}'.format(l2_gtr))
+            logger.info('Ang_GTR: {}'.format(ang_gtr))
+            logger.info('mAP: {}'.format(AP))
+            logger.info('True_positives: {}'.format(true_positives))
+            logger.info('False_positives: {}'.format(false_positives))
+        except:
+            pass
 
     # Measure the time only for this worker (before the synchronization barrier)
     total_time = time.perf_counter() - start_time
