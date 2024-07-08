@@ -42,9 +42,9 @@ Test:
 
 Annotation file:
 
-[GOOreal-train_data_Annotation](https://pan.baidu.com/s/1d-bgh5Kh3dKj8-d0mR1RnA) [code](4s36)
+[GOOreal-train_data_Annotation](https://pan.baidu.com/s/1d-bgh5Kh3dKj8-d0mR1RnA) (code:4s36)
 
-[GOOreal-val_data_Annotation](https://pan.baidu.com/s/1LvkbYuvnmgUzq7ot9RmNxg) [code](mx3c)
+[GOOreal-val_data_Annotation](https://pan.baidu.com/s/1LvkbYuvnmgUzq7ot9RmNxg) (code:mx3c)
 
 ~~~~
 If you want to train on GOO-Real or GOO-Synth dataset, please keep the data structure as follows:
