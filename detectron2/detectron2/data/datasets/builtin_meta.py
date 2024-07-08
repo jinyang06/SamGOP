@@ -179,7 +179,7 @@ COCO_CATEGORIES_ = [
     {"color": [174, 57, 255], "isthing": 1, "id": 24, "name": "bear"},
     {"color": [174, 57, 255], "isthing": 1, "id": 25, "name": "bear"},
 ]
-with open('/data1/jinyang/TransGOP/MaskDINO/datasets/coco/annotations/cate.txt', 'r') as f:
+with open('./datasets/coco/annotations/cate.txt', 'r') as f:
     names = f.readlines()
 list_ = []
 
