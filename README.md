@@ -40,7 +40,7 @@ Train:
 Test:
 [GOOreal-test_data](https://mailnwpueducn-my.sharepoint.com/:u:/g/personal/yangle_nwpu_mail_nwpu_edu_cn/EXlBBBnd2khPk7S0_FKKGtQBCoIKoHSu7SmpdpxTAICpdw)
 
-Annotation file:
+You can download GOO-Real annotations file from Baidu disk::
 
 [GOOreal-train_data_Annotation](https://pan.baidu.com/s/1d-bgh5Kh3dKj8-d0mR1RnA) (code:4s36)
 
