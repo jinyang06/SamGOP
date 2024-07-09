@@ -2,6 +2,33 @@
 This repository is the official implementation of "Boosting Gaze Object Prediction via Pixel-level Supervision from Vision Foundation Model"
 ![Illustrating the architecture of the proposed method](figures/framework.png)
 
+## Environment Preparation
+
+### Create conda environment
+```bash
+cd SamGOP
+conda create --name samgop python=3.8 -y
+conda activate samgop
+conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
+pip install -U opencv-python
+
+# under your working directory
+cd detectron2
+pip install -e .
+```
+
+### Install Requirements
+```bash
+cd ..
+pip install -r requirements.txt
+```
+
+
+### CUDA kernel for MSDeformAttn
+```bash
+cd maskGOP/modeling/pixel_decoder/ops
+sh make.sh
+```
 
 ## Data Preparation
 We train our model on GOO-Real and GOO-Synth datasets respectively
@@ -63,34 +90,6 @@ If you want to train on GOO-Real or GOO-Synth dataset, please keep the data stru
             ├── 3610.png
             ├── ...
 ~~~~
-
-## Environment Preparation
-
-### Create conda environment
-```bash
-cd SamGOP
-conda create --name samgop python=3.8 -y
-conda activate samgop
-conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
-pip install -U opencv-python
-
-# under your working directory
-cd detectron2
-pip install -e .
-```
-
-### Install Requirements
-```bash
-cd ..
-pip install -r requirements.txt
-```
-
-
-### CUDA kernel for MSDeformAttn
-```bash
-cd maskGOP/modeling/pixel_decoder/ops
-sh make.sh
-```
 
 ## Training & Inference
 To carry out experiments, please follow these commands:
