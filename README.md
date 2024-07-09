@@ -95,11 +95,11 @@ sh make.sh
 ## Training & Inference
 To carry out experiments, please follow these commands:
 ```train
-python train_net.py --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskdino_R50_bs16_50ep_3s.yaml SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0001
+python train_net.py --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskGOP_R50_bs2_75ep_3s.yaml SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0001
 ```
 To eval the model, please follow these commands:
 ```eavl
-python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskdino_R50_bs16_50ep_3s.yaml MODEL.WEIGHTS weights_path
+python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskGOP_R50_bs2_75ep_3s.yaml MODEL.WEIGHTS weights_path
 ```
 
 ## Our Model
