@@ -112,8 +112,6 @@ class Trainer(DefaultTrainer):
 
         optimizer = self.build_optimizer(cfg, model)
         data_loader = self.build_train_loader(cfg)
-        total_params = sum(p.numel() for p in model.parameters())
-        x = 0
         model = create_ddp_model(model, broadcast_buffers=False)
         self._trainer = (AMPTrainer if cfg.SOLVER.AMP.ENABLED else SimpleTrainer)(
             model, data_loader, optimizer
@@ -242,8 +240,6 @@ class Trainer(DefaultTrainer):
         # coco panoptic segmentation lsj new baseline
         elif cfg.INPUT.DATASET_MAPPER_NAME == "coco_panoptic_lsj":
             mapper = COCOPanopticNewBaselineDatasetMapper(cfg, True, prefetch_factor=2)
-            # x=mapper
-            # z=cfg
             return build_detection_train_loader(cfg, mapper=mapper)
         else:
             mapper = None
@@ -366,8 +362,6 @@ def setup(args):
     cfg.merge_from_file(args.config_file)
     cfg.merge_from_list(args.opts)
     cfg.SOLVER.CHECKPOINT_PERIOD = 1805
-    # cfg.MODEL.WEIGHTS = '/data1/jinyang/TransGOP/MaskDINO2/output_real_world_gtmask_continue/model_final.pth'
-    # cfg.MODEL.WEIGHTS ='/data1/jinyang/TransGOP/MaskDINO/logs/output_share_backbone_ps_CA_gazecone_v2_beforeSoftMax_resnet_last_dirw=1_continue/model_0029999.pth'
     cfg.freeze()
     default_setup(cfg, args)
     setup_logger(output=cfg.OUTPUT_DIR, distributed_rank=comm.get_rank(), name="maskdino")
@@ -395,14 +389,6 @@ def main(args):
     trainer = Trainer(cfg)
     trainer.resume_or_load(resume=args.resume)
     return trainer.train()
-
-
-# def setup_seed(seed):
-#     torch.manual_seed(seed)
-#     torch.cuda.manual_seed_all(seed)
-#     np.random.seed(seed)
-#     random.seed(seed)
-#     torch.backends.cudnn.deterministic = True
 
 if __name__ == "__main__":
     # setup_seed(20)
