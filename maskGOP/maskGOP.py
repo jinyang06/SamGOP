@@ -339,8 +339,8 @@ class MaskDINO(nn.Module):
         self.relu = nn.ReLU(inplace=True)
 
         # pxiel shuffle
-        self.ps1 = Pixel_shuffle1(16, 256)
-        # self.ps1 = Pixel_shuffle(64, 256)
+        # self.ps1 = Pixel_shuffle1(16, 256)
+        self.ps1 = Pixel_shuffle(64, 256)
         self.ps2 = Pixel_shuffle(128, 512)
         self.ps3 = Pixel_shuffle(256, 1024)
         self.ps4 = Pixel_shuffle(512, 2048)
