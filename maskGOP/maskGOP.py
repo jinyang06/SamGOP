@@ -589,17 +589,9 @@ class MaskDINO(nn.Module):
                 dict_['boxes'] = head_target_box
                 head_targets.append(dict_)
                 head_boxes.append(head_box)
-            # x=0
             gt_gaze_direction = [x["gaze_direction"].to(self.device) for x in batched_inputs]
             gt_gaze_item_mask = [x["gaze_related_ann"]['gaze_item_mask'].to(self.device) for x in batched_inputs]
 
-        # eye_position = [x["eye"] for x in batched_inputs]
-        # gaze_filed_list = []
-        # for eye_p in eye_position:
-        #     gaze_field_ = generate_gaze_field(eye_p)
-        #     gaze_field_ = torch.FloatTensor(gaze_field_)
-        #     gaze_filed_list.append(gaze_field_)
-        # gaze_field = torch.stack(gaze_filed_list).to(self.device)
         images = [x["image"].to(self.device) for x in batched_inputs]
         images = [(x - self.pixel_mean) / self.pixel_std for x in images]
         images = ImageList.from_tensors(images, self.size_divisibility)
@@ -613,40 +605,12 @@ class MaskDINO(nn.Module):
 
 
         features = self.backbone(images.tensor)
-        # face_feature = self.backbone(images.tensor)
-        # face_feature = face_feature['res5']
         scene_feature = features['res5']
-        # scene_feature_detach = scene_feature_undetach.clone().detach()
 
         features['res2'] = self.ps1(features['res2'])
         features['res3'] = self.ps2(features['res3'])
         features['res4'] = self.ps3(features['res4'])
         features['res5'] = self.ps4(features['res5'])
-
-        # new_feature = {}
-        # index = 2
-        # for value in features.values():
-        #     feat = F.interpolate(value, size=(value.shape[2] * 4, value.shape[3] * 4), mode='bilinear',
-        #                                 align_corners=False)
-        #     new_feature['res' + str(index)] = feat
-        #     index += 1
-        # features = new_feature
-
-
-
-        # head_embeding = face_feature.clone()
-        # head_embeding = self.avgpool(head_embeding).view(-1, 2048)
-        # gaze_direction = self.direction_fc(head_embeding)
-        # normalized_direction = gaze_direction / gaze_direction.norm(dim=1).unsqueeze(1)
-
-        # generate gaze field map
-        # batch_size, channel, height, width = gaze_field.size()
-        # gaze_field = gaze_field.permute([0, 2, 3, 1]).contiguous()
-        # gaze_field = gaze_field.view([batch_size, -1, 2])
-        # gaze_field = torch.matmul(gaze_field, normalized_direction.view([batch_size, 2, 1]))
-        # gaze_cone = gaze_field.view([batch_size, height, width, 1])
-        # gaze_cone = gaze_cone.permute([0, 3, 1, 2]).contiguous()
-        # gaze_cone = nn.ReLU()(gaze_cone)
 
         if self.training:
             # dn_args={"scalar":30,"noise_scale":0.4}
@@ -660,31 +624,6 @@ class MaskDINO(nn.Module):
             else:
                 targets = None
             outputs, mask_dict, object_mem, object_pos, object_mask, head_outputs = self.sem_seg_head(features, targets=targets)
-
-            #####################################################
-            # Get Mask Tensor
-            #####################################################
-            # pred_mask = outputs['pred_masks']
-            # mask_cls_results = outputs['pred_logits']
-            # mask_pred_results = F.interpolate(
-            #     pred_mask,
-            #     size=(images.tensor.shape[-2], images.tensor.shape[-1]),
-            #     mode="bilinear",
-            #     align_corners=False,
-            # )
-            # mask_tensor_list = []
-            # for mask_pred_results_, mask_cls_result_ in zip(mask_pred_results, mask_cls_results):
-            #     width = 224
-            #     height = 224
-            #     mask_pred_results_ = retry_if_cuda_oom(sem_seg_postprocess)(
-            #         mask_pred_results_, [224, 224], height, width
-            #     )
-            #
-            #     instance_r = self.instance_training(mask_cls_result_, mask_pred_results_)
-            #     mask = instance_r.pred_masks
-            #     mask_tensor_list.append(mask)
-            # mask_tensor = torch.stack(mask_tensor_list).to(self.device)
-            #####################################################
 
             orig_target_sizes = 224
 
@@ -725,29 +664,8 @@ class MaskDINO(nn.Module):
             gaze_cone = gaze_cone.permute([0, 3, 1, 2]).contiguous()
             gaze_cone = nn.ReLU()(gaze_cone)
 
-            gaze_cone = torch.pow(gaze_cone, 2)
-            # m=0
-            ########################################################
-            # predicted head box visualization
-            # from PIL import Image,ImageDraw
-            # for batch, head in zip(batched_inputs, heads):
-            #     head_gt_ = batch['gaze_related_ann']['head_box'][:,0:4]
-            #     im = batch['ori_img']
-            #     head_box_vis = head['boxes']
-            #     head_box_vis[0][0] = head_box_vis[0][0]
-            #     head_box_vis[0][1] = head_box_vis[0][1]
-            #     head_box_vis[0][2] = head_box_vis[0][2]
-            #     head_box_vis[0][3] = head_box_vis[0][3]
-            #     head_box_vis = head_box_vis.detach().cpu().numpy()
-            #     # head_box_vis[:,[0, 1]] = head_box_vis[:,[1, 0]]
-            #     # head_box_vis[:,[2, 3]] = head_box_vis[:,[3, 2]]
-            #
-            #     draw = ImageDraw.Draw(im)
-            #     draw.rectangle(head_box_vis[0].tolist(), fill=None, outline='red', width=3)
-            #     draw.rectangle(head_gt_[0].tolist(), fill=None, outline='green', width=3)
-            #     im.show()
-            #     z=0
-            ########################################################
+            # gaze_cone = torch.pow(gaze_cone, 2)
+            
             if not self.training:
                 head_boxes = []
             heads_channel, is_head = get_head_channel(heads, head_boxes, self.training)
@@ -791,7 +709,6 @@ class MaskDINO(nn.Module):
             bs_, c_, h_, w_ = x_gaze.shape
             mask_shape_ = (bs_, h_, w_)  # 3 dimensions with size 4, 5 and 6 respectively
             mask_ = torch.zeros(mask_shape_, dtype=torch.bool).to('cuda')
-            # mask = tensor_list.mask
             pos_ = make_pos(mask_, c_ / 2)
 
             hs_ = self.transformer_layer(src_, mask_, self.query_embed.weight, pos_, object_mem, object_pos, object_mask)[0]
@@ -809,17 +726,12 @@ class MaskDINO(nn.Module):
             x_gaze = self.relu(x_gaze)
             x_gaze = self.conv4(x_gaze)
 
-            # normalized_direction = 0
-
             # bipartite matching-based loss
             losses = self.criterion(outputs, targets, x_gaze, normalized_direction, head_targets, gt_gaze_item_mask, mask_dict)
 
             for k in list(losses.keys()):
                 if k in self.criterion.weight_dict:
                     losses[k] *= self.criterion.weight_dict[k]
-                # else:
-                #     # remove this loss if not specified in `weight_dict`
-                #     losses.pop(k)
             return losses
         else:
             outputs, _, object_mem, object_pos, object_mask, head_outputs = self.sem_seg_head(features)
