@@ -1,6 +1,6 @@
 ## Boosting Gaze Object Prediction via Pixel-level Supervision from Vision Foundation Model
 This repository is the official implementation of "Boosting Gaze Object Prediction via Pixel-level Supervision from Vision Foundation Model"
-<div align="center"> <img src=figures/framework.png width=60% /> </div>
+<div align="left"> <img src=figures/framework.png width=60% /> </div>
 
 
 
