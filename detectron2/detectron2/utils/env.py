@@ -33,11 +33,11 @@ def seed_all_rng(seed=None):
     """
     # seed = 4041020
 
-    # seed = 22540008
+    seed = 22540008
 
     # seed = 40094884
 
-    seed = 45106881
+    # seed = 45106881
 
     # seed = 53702399
     # seed = 57042010
