@@ -109,9 +109,7 @@ python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/i
 ## Acknowledgements
 Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)
 
-## Environment Preparation
-
-### Citation
+## Citation
 ```bash
 @article{jin2024boosting,
   title={Boosting Gaze Object Prediction via Pixel-level Supervision from Vision Foundation Model},
