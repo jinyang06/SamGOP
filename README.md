@@ -103,18 +103,6 @@ To eval the model, please follow these commands:
 python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskGOP_R50_bs2_75ep_3s.yaml MODEL.WEIGHTS weights_path
 ```
 
-## Our Model
-
-
 ## Acknowledgements
 Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)
 
-## Citation
-```bash
-@article{jin2024boosting,
-  title={Boosting Gaze Object Prediction via Pixel-level Supervision from Vision Foundation Model},
-  author={Jin, Yang and Zhang, Lei and Yan, Shi and Fan, Bin and Wang, Binglu},
-  journal={arXiv preprint arXiv:2408.01044},
-  year={2024}
-}
-```
