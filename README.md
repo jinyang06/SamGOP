@@ -57,9 +57,9 @@ Test:
 
 Annotation file:
 
-[GOOsynth-train_data_Annotation](https://mailnwpueducn-my.sharepoint.com/:u:/g/personal/yangle_nwpu_mail_nwpu_edu_cn/ET6h-STtBiVIn7jpwOP8bzEB__u-FEmwT8wXLKtTUw865g)
+[GOOsynth-train_data_Annotation](https://pan.baidu.com/s/1_t1PJIvp8i5KlljuksVubQ?pwd=v4nx) (Code:v4nx)
 
-[GOOsynth-test_data_Annotation](https://mailnwpueducn-my.sharepoint.com/:u:/g/personal/yangle_nwpu_mail_nwpu_edu_cn/EW3HgRNFGPVHmaoYeFwhY1gB8UxwdEWSr55UwDaxwYvp1w)
+[GOOsynth-test_data_Annotation](https://pan.baidu.com/s/1oXcTH0lWFfMBti5LFrBGhg?pwd=ayqm) (Code:ayqm)
 
 You can download GOO-Real from OneDrive:
 
