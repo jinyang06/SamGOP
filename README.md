@@ -108,7 +108,7 @@ Download model weights from BaiduCloud
 
 [GOO-Synth_re-trained_model](https://pan.baidu.com/s/14aIWQ_xr3yToIMCZwD9UWg?pwd=2ma2) (code:2ma2)
 
-[GOO-Real_retrained_model](https://pan.baidu.com/s/1v5PYa1IV4AmsDdfQqDD-yQ?pwd=24zt) (code:24zt)
+[GOO-Real_re-trained_model](https://pan.baidu.com/s/1v5PYa1IV4AmsDdfQqDD-yQ?pwd=24zt) (code:24zt)
 
 ## Acknowledgements
 Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)
