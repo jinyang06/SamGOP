@@ -103,6 +103,10 @@ To eval the model, please follow these commands:
 python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/instance-segmentation/maskGOP_R50_bs2_75ep_3s.yaml MODEL.WEIGHTS weights_path
 ```
 
+## Model Weights
+[GOO-Synth_re-trained_model](https://pan.baidu.com/s/14aIWQ_xr3yToIMCZwD9UWg?pwd=2ma2) (code:2ma2)
+[GOO-Real_retrained_model](https://pan.baidu.com/s/1v5PYa1IV4AmsDdfQqDD-yQ?pwd=24zt) (code:24zt)
+
 ## Acknowledgements
 Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)
 
