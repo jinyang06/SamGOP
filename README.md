@@ -104,7 +104,7 @@ python eavl_train_net.py --eval-only --num-gpus 1 --config-file ./configs/coco/i
 ```
 
 ## Model Weights
-Download model weights from Baidu disk
+Download model weights from Baidu disk：
 
 [GOO-Synth_re-trained_model](https://pan.baidu.com/s/14aIWQ_xr3yToIMCZwD9UWg?pwd=2ma2) (code:2ma2)
 
