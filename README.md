@@ -113,3 +113,16 @@ Download model weights from Baidu disk：
 ## Acknowledgements
 Our implamentation is based on [detectron2](https://github.com/facebookresearch/detectron2) and [maskdino](https://github.com/facebookresearch/detectron2)
 
+## Citation
+
+```
+@inproceedings{jin2024boosting,
+  title={Boosting Gaze Object Prediction via Pixel-Level Supervision from Vision Foundation Model},
+  author={Jin, Yang and Zhang, Lei and Yan, Shi and Fan, Bin and Wang, Binglu},
+  booktitle={European Conference on Computer Vision},
+  pages={369--386},
+  year={2024},
+  organization={Springer}
+}
+```
+
